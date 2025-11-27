@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+*.db
+*.db-shm
+*.db-wal
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+
+# Others
+*.log
+*.DS_Store
