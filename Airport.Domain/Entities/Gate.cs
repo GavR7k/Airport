@@ -17,7 +17,7 @@ namespace Airport.Domain.Entities
         public string Terminal { get; set; } = string.Empty;
 
         public GateStatus Status { get; set; }
-        public List<Flight> FlightsList { get; set; } = new List<Flight>();
+        public List<Flight> Flights { get; set; } = new List<Flight>();
 
     }
 }

@@ -13,6 +13,6 @@
             public Guid Id { get; set; }
             public string Name { get; set; } = string.Empty;
             public string PassportNumber { get; set; } = string.Empty;
-            public List<Ticket> Ticket { get; set; } = new List<Ticket>();
+            public List<Ticket> Tickets { get; set; } = new List<Ticket>();
         }
     }

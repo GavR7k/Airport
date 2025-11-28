@@ -18,9 +18,8 @@ namespace Airport.Domain.Entities
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
         public FlightStatus FlightStatus { get; set; }
-        public Guid GateId { get; set; }
+        public Guid? GateId { get; set; }
         public Gate? Gate { get; set; }
-
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
     }
