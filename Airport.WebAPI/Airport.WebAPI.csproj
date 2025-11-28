@@ -14,4 +14,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Airport.Infrastructure\Airport.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
