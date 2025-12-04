@@ -36,7 +36,6 @@ namespace Airport.Infrastructure.Configurations
                    .WithMany(p => p.Tickets)
                    .HasForeignKey(t => t.PassengerId)
                    .OnDelete(DeleteBehavior.Cascade);
-            
         }
     }
 }

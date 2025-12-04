@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: airport_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: test_user1
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: AirportDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - airport_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user1 -d AirportDb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Airport.WebAPI/Dockerfile
+    container_name: airport_api
+    ports:
+      - "5000:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=airport_postgres;Port=5432;Database=AirportDb;Username=test_user1;Password=123
+
+volumes:
+  airport_data:
+
