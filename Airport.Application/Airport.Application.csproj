@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Airport.Domain\Airport.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

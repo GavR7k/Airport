@@ -16,11 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Airport.Application\Airport.Application.csproj" />
     <ProjectReference Include="..\Airport.Infrastructure\Airport.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

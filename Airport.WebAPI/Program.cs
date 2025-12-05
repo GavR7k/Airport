@@ -1,4 +1,8 @@
+using Airport.Application.Interfaces;
+using Airport.Application.Services;
+using Airport.Domain.Interfaces;
 using Airport.Infrastructure.Persistence;
+using Airport.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +18,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AirportDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")
 ));
+
+builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 
 
 var app = builder.Build();
