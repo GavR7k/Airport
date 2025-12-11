@@ -13,50 +13,50 @@ namespace Airport.Application.Services
 {
     public class GateService : IGateService
     {
-        private readonly IGateRepository _gateRepository;
+        private readonly IGateRepository _repository;
 
         public GateService(IGateRepository gateRepository)
         {
-            _gateRepository = gateRepository;
+            _repository = gateRepository;
         }
         public async Task<GateDto> CreateGateAsync(GateDto dto)
         {
             var gate = MapToEntity(dto);
-            await _gateRepository.AddAsync(gate);
+            await _repository.AddAsync(gate);
             return MapToDto(gate);
         }
 
         public async Task<bool> DeleteGateAsync(Guid id)
         {
-            var gate = await _gateRepository.GetByIdAsync(id);
+            var gate = await _repository.GetByIdAsync(id);
             if (gate == null) return false;
 
-            await _gateRepository.DeleteAsync(id);
+            await _repository.DeleteAsync(id);
             return true;
         }
 
         public async Task<GateDto?> GetGateAsync(Guid id)
         {
-            var gate = await _gateRepository.GetByIdAsync(id);
+            var gate = await _repository.GetByIdAsync(id);
             return gate == null ? null : MapToDto(gate);
         }
 
         public async Task<List<GateDto>> GetGatesAsync()
         {
-            var listofgates = await _gateRepository.GetAllAsync();
+            var listofgates = await _repository.GetAllAsync();
             return listofgates.Select(MapToDto).ToList();
         }
 
         public async Task<bool> UpdateGateAsync(GateDto dto)
         {
-            var gate = await _gateRepository.GetByIdAsync(dto.Id);
+            var gate = await _repository.GetByIdAsync(dto.Id);
             if (gate == null) return false;
 
             gate.Number = dto.Number;
             gate.Terminal = dto.Terminal;
             gate.Status = dto.Status;
 
-            await _gateRepository.UpdateAsync(gate);
+            await _repository.UpdateAsync(gate);
             return true;
         }
 

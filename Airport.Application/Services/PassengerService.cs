@@ -30,24 +30,42 @@ namespace Airport.Application.Services
 
 
 
-        public Task<bool> DeletePassengerAsync(Guid id)
+        public async Task<bool> DeletePassengerAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var passenger = await _repository.GetByIdAsync(id);
+            if (passenger != null)
+            {
+                await _repository.DeleteAsync(id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public Task<PassengerDto?> GetPassengerAsync(Guid id)
+        public async Task<PassengerDto?> GetPassengerAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var passenger = await _repository.GetByIdAsync(id);
+            return passenger != null ? MapToDto(passenger) : null;
         }
 
-        public Task<List<PassengerDto>> GetPassengersAsync()
+        public async Task<List<PassengerDto>> GetPassengersAsync()
         {
-            throw new NotImplementedException();
+            var passengers = await _repository.GetAllAsync();
+            return passengers.Select(MapToDto).ToList();
         }
 
-        public Task<bool> UpdatePassengerAsync(PassengerDto dto)
+        public async Task<bool> UpdatePassengerAsync(PassengerDto dto)
         {
-            throw new NotImplementedException();
+            var passenger = await _repository.GetByIdAsync(dto.Id);
+            if (passenger == null) return false;
+
+            passenger.Name = dto.Name;
+            passenger.PassportNumber = dto.PassportNumber;
+
+            await _repository.UpdateAsync(passenger);
+            return true;
         }
         private static PassengerDto MapToDto(Passenger passenger)
         {

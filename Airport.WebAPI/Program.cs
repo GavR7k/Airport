@@ -36,7 +36,7 @@ builder.Services.AddScoped<IGateService, GateService>();
 builder.Services.AddScoped<IGateRepository, GateRepository>();
 
 builder.Services.AddScoped<IPassengerRepository, PassengerRepository>();
-
+builder.Services.AddScoped<IPassengerService, PassengerService>();
 
 
 
