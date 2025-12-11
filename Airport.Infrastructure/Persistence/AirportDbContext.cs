@@ -14,7 +14,7 @@ namespace Airport.Infrastructure.Persistence
         public AirportDbContext(DbContextOptions<AirportDbContext> options) : base(options) { }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Gate> Gates { get; set; }
-        public DbSet<Passenger> passengers { get; set; }
+        public DbSet<Passenger> Passengers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

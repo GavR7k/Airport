@@ -13,40 +13,40 @@ namespace Airport.Infrastructure.Repositories
     public class GateRepository : IGateRepository
     {
 
-        private readonly AirportDbContext _airportDbContext;
+        private readonly AirportDbContext _db;
         public GateRepository(AirportDbContext airportDbContext)
         {
-            _airportDbContext = airportDbContext;
+            _db = airportDbContext;
         }
 
         public async Task AddAsync(Gate gate)
         {
-            await _airportDbContext.Gates.AddAsync(gate);
-            await _airportDbContext.SaveChangesAsync();
+            await _db.Gates.AddAsync(gate);
+            await _db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            var gate = await _airportDbContext.Gates.FindAsync(id);
+            var gate = await _db.Gates.FindAsync(id);
 
             if (gate != null)
             {
 
-                _airportDbContext.Gates.Remove(gate);
-                await _airportDbContext.SaveChangesAsync();
+                _db.Gates.Remove(gate);
+                await _db.SaveChangesAsync();
             }
         }
 
         public async Task<List<Gate>> GetAllAsync()
         {
-            return await _airportDbContext.Gates
+            return await _db.Gates
                 .Include(g => g.Flights)
                 .ToListAsync();
         }
 
         public async Task<Gate?> GetByIdAsync(Guid id)
         {
-            return await _airportDbContext.Gates
+            return await _db.Gates
                 .Include(g => g.Flights)
                 .Where(g => g.Id == id)
                 .FirstOrDefaultAsync();
@@ -54,8 +54,8 @@ namespace Airport.Infrastructure.Repositories
 
         public async Task UpdateAsync(Gate gate)
         {
-            _airportDbContext.Gates.Update(gate);
-            await _airportDbContext.SaveChangesAsync();
+            _db.Gates.Update(gate);
+            await _db.SaveChangesAsync();
 
         }
     }
